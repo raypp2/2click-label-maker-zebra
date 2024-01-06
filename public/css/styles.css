@@ -159,6 +159,9 @@ button:hover {
 
 #loadingIndicator {
     color: blue;
+    position: relative;
+    left: 15px;
+    top: -70px;
 }
 
 #statusMessage {
