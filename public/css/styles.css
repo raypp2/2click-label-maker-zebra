@@ -1,0 +1,211 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) { /* Adjust breakpoint as needed */
+    .form-group-horizontal {
+        flex-direction: column;
+    }
+    .form-group {
+        margin-right: 0;
+    }
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+h5 {
+    color: #333;
+    text-align: center;
+}
+
+.section-title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: #000;
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    flex: 1; 
+    min-width: 100px; 
+    margin-right: 10px; /* Spacing between fields */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+
+.form-group-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.label-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.shortcut-text {
+    margin-left: auto;
+    font-size: 0.8em; 
+    color: #666; 
+}
+
+.buttons {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px;
+    flex-wrap: wrap; /* Allows buttons to wrap in smaller screens */
+}
+
+button {
+    background-color: #5C7AEA;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-container {
+    text-align: center; 
+    margin: 0 10px; /* Adds spacing between button containers */
+}
+
+.shortcut-label {
+    display: block;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
+
+
+button:hover {
+    background-color: #4a69bb;
+}
+
+
+.preview {
+    margin-top: 20px;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+}
+
+.preview img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #3a3a3a;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+#thumbnails img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+.status {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#loadingIndicator {
+    color: blue;
+}
+
+#statusMessage {
+    font-size: 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+.fade-out {
+    animation: fadeOut 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.iconResults {
+    margin-top: 20px;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+}
+
+.icon {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.icon:active {
+    transform: scale(0.95);
+}

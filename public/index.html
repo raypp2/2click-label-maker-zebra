@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Label Printer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Zebra Label Printer</h1>
+        <h5>By Ray Perfetti | <a href="http://localhost:8000" target="_blank">ZPL Print Server</a></h5>
+        <div class="form-group">
+            <div class="label-container">
+                <label for="primaryText">Primary Text</label>
+                <span class="shortcut-text">⌘ 1</span>
+            </div>
+            <input type="text" id="primaryText" placeholder="Enter primary text">
+            <p><button id="searchIconsButton">Search Icons</button> <span class="shortcut-text">Press Enter ↵</span></p>
+        </div>
+        <div class="form-group">
+            <div class="label-container">
+                <label for="secondaryText">Secondary Text</label>
+                <span class="shortcut-text">⌘ 2</span>
+            </div>
+            <input type="text" id="secondaryText" placeholder="Enter secondary text">
+        </div>
+        <div class="form-group-horizontal">
+            <div class="form-group">
+                <label for="qtyText">Quantity to Print</label>
+                <input type="text" id="qtyText" placeholder="Enter Quantity">
+            </div>
+            <div class="form-group">
+                <label for="dateText">Date</label>
+                <input type="text" id="dateText" placeholder="Enter date text">
+            </div>
+            <div class="form-group">
+                <label for="iconUrl">Icon URL</label>
+                <input type="text" id="iconUrl" placeholder="Enter icon URL">
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="button-container">
+                <button id="previewButton">Preview Label</button>
+                <span class="shortcut-label">⌘ E</span>
+            </div>
+            <div class="button-container">
+                <button id="printButton">Print Label</button>
+                <span class="shortcut-label">⌘ P</span>
+            </div>
+            <div class="button-container">
+                <button id="startOverButton">Start Over</button>
+                <span class="shortcut-label">⌘ R</span>
+            </div>
+        </div>        
+        <div class="status">
+            <div id="loadingIndicator" style="display:none;"></div>
+            <div id="statusMessage"></div>
+        </div>
+        <div class="preview" id="previewDiv">
+            <div class="section-title">Label Preview</div>
+            <img id="preview-image" alt="Label Preview" />
+        </div>
+        <div class="iconResults" id="iconDiv">
+            <div class="section-title"><img src="https://www.iconfinder.com/static/img/logo/black.svg" width="200" alt="Iconfinder Logo"> &nbsp; Results</div>
+            <div id="iconResults"></div>
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

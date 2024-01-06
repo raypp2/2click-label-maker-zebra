@@ -1,0 +1,25 @@
+# Logs
+logs
+*.log
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Environment variables
+.env
+
+node_modules
+
+# Folder for notes not for sharing
+private
+
+# Old versions
+_OLD
+_OLD/*
+
+# OS Files
+.DS_Store
+.vscode/*
