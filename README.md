@@ -1,4 +1,4 @@
-<img src="documentation/images/labelMakerScreenRecording.gif" width="830" />
+<img src="documentation/images/labelMakerScreenRecording.gif" width="830" height="674" />
 
 # 2-Click Label Maker
 
