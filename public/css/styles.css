@@ -81,6 +81,14 @@ h5 {
     box-sizing: border-box; /* Include padding and border in the width */
 }
 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
 .label-container {
     display: flex;
     width: 100%;
@@ -135,11 +143,12 @@ button:hover {
     text-align: center;
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .preview img {
-    max-width: 100%;
-    height: auto;
     border: 1px solid #3a3a3a;
     border-radius: 10px;
     visibility: hidden;
@@ -211,4 +220,9 @@ button:hover {
 
 .icon:active {
     transform: scale(0.95);
+}
+
+.rotate-90 {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease-in-out;
 }

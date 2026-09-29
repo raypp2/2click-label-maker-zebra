@@ -15,6 +15,7 @@ document.getElementById('primaryText').focus();
 
 async function previewLabel() {
     const primaryText = document.getElementById('primaryText').value;
+    const labelType = document.getElementById('labelType').value;
     const secondaryText = document.getElementById('secondaryText').value;
     const dateText = document.getElementById('dateText').value;
     const iconUrl = document.getElementById('iconUrl').value;
@@ -23,6 +24,7 @@ async function previewLabel() {
     try {
         const response = await axios.post('/api/preview', {
             primaryText: primaryText,
+            labelType: labelType,
             secondaryText: secondaryText,
             dateText: dateText,
             iconUrl: iconUrl
@@ -38,6 +40,14 @@ async function previewLabel() {
             previewImage.src = 'data:image/png;base64,' + response.data.img;
             previewImage.style.visibility = 'visible';
             previewLabel.style.display = 'flex';
+
+            // Rotate the image if the label type is 'Box'
+            if (labelType === 'Box') {
+                previewImage.style.height = '550px';
+                previewImage.classList.add('rotate-90');
+            } else {
+                previewImage.classList.remove('rotate-90');
+            }
         } else {
             console.error('Invalid image data:', response.data);
             updateStatusMessage('Error generating image data.', true);
@@ -53,6 +63,7 @@ async function previewLabel() {
 
 function printLabel() {
     const primaryText = document.getElementById('primaryText').value;
+    const labelType = document.getElementById('labelType').value;
     const secondaryText = document.getElementById('secondaryText').value;
     const dateText = document.getElementById('dateText').value;
     const iconUrl = document.getElementById('iconUrl').value;
@@ -61,6 +72,7 @@ function printLabel() {
     showLoading();
     axios.post('/api/print', {
         primaryText: primaryText,
+        labelType: labelType,
         secondaryText: secondaryText,
         dateText: dateText,
         iconUrl: iconUrl,
@@ -111,7 +123,7 @@ function displayIcons(icons) {
         img.alt = 'Icon';
         img.className = 'icon'; // Add this line
         img.addEventListener('click', () => {
-            document.getElementById('iconUrl').value = icon.previewUrl.replace(/\d+(?=\.png)/, '145');
+            document.getElementById('iconUrl').value = icon.previewUrl.replace(/\d+(?=\.png)/, '300');
         });
         iconContainer.appendChild(img);
     });

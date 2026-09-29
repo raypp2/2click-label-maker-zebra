@@ -2,25 +2,29 @@
 require('dotenv').config()
 const zplServerUrl = process.env.zplServerUrl;
 const printerId = process.env.printerId;
-const labelId = process.env.labelId;
-const port = 80;
+const port = process.env.PORT || 80;
 
 const { searchIconsFromIconFinder,
         convertImageToZPL } = require('./src/graphicHandler');
 
-const { createZPL } = require('./src/zplGenerator');
+const labelConfigs = require('./src/labelConfig');
 
 const axios = require('axios');
 
 
-// Create an mDNS Advertiser
-const mdns = require('mdns');
-const ad = mdns.createAdvertisement(mdns.tcp('http'), port, {
+// Create an mDNS Advertiser (optional -- the native mdns module only builds
+// on older Node; skip it rather than refuse to start the server)
+try {
+  const mdns = require('mdns');
+  const ad = mdns.createAdvertisement(mdns.tcp('http'), port, {
     name: 'label',
     domain: 'local'
   });
   ad.start();
   console.log('mDNS Advertiser started for label.local at port %d', port);
+} catch (err) {
+  console.warn('mDNS advertisement unavailable (%s) -- continuing without it.', err.code || err.message);
+}
 
 
 // Start web & api server
@@ -62,19 +66,32 @@ app.post('/api/convert-to-zpl', async (req, res) => {
 
 
 app.post('/api/preview', async (req, res) => {
-    const { primaryText, secondaryText, dateText, iconUrl } = req.body;
+    const { primaryText, labelType, secondaryText, dateText, iconUrl } = req.body;
 
     let iconZpl = "";
+    let zplData;
+    let labelId;
+
+    const labelConfig = labelConfigs[labelType];
+    if (!labelConfig) {
+        return res.status(400).send('Invalid label type');
+    }
+
+    // ID used by the zpl-rest API to identify the label template
+    labelId = labelConfig.labelId;
+
     if (iconUrl) {
         try {
-            iconZpl = await convertImageToZPL(iconUrl);
+            iconZpl = await convertImageToZPL(iconUrl, labelConfig.maxWidth, labelConfig.rotate);
         } catch (error) {
             console.error('Error converting image to ZPL:', error);
             return res.status(500).send(`Error: ${error.message}`);
         }
     }
 
-    const zplData = createZPL(primaryText, secondaryText, dateText, iconZpl);
+    zplData = labelConfig.zplTemplate(primaryText, secondaryText, dateText, iconZpl);
+
+// TODO: Rotate preview display of image
 
     console.log("Generating ZPL preview");
 
@@ -104,19 +121,30 @@ app.post('/api/preview', async (req, res) => {
 
 
 app.post('/api/print', async (req, res) => {
-    const { primaryText, secondaryText, dateText, iconUrl, qtyText } = req.body;
+    const { primaryText, labelType, secondaryText, dateText, iconUrl, qtyText } = req.body;
 
     let iconZpl = "";
+    let zplData;
+    let labelId;
+
+    const labelConfig = labelConfigs[labelType];
+    if (!labelConfig) {
+        return res.status(400).send('Invalid label type');
+    }
+
+    // ID used by the zpl-rest API to identify the label template
+    labelId = labelConfig.labelId;
+
     if (iconUrl) {
         try {
-            iconZpl = await convertImageToZPL(iconUrl);
+            iconZpl = await convertImageToZPL(iconUrl, labelConfig.maxWidth, labelConfig.rotate);
         } catch (error) {
             console.error('Error converting image to ZPL:', error);
             return res.status(500).send(`Error: ${error.message}`);
         }
     }
-    
-    const zplData = createZPL(primaryText, secondaryText, dateText, iconZpl);
+
+    zplData = labelConfig.zplTemplate(primaryText, secondaryText, dateText, iconZpl);
 
     console.log("Printing %s labels", qtyText);
     //console.log(zplData);
