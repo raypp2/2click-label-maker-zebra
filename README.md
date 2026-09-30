@@ -10,6 +10,9 @@
 - Previews the label 
 - Prints the label 
 
+**Voice control (optional)**
+- [2-Click Label Maker for Alexa](https://github.com/raypp2/2click-label-maker-alexa): say "Alexa, open label maker," then "chicken soup," to preview the label on an Echo Show and print it after a yes
+
 **Other requirements**
 -  A Zebra label printer (generates ZPL language)
 -  [ZPL-Rest](https://github.com/mrothenbuecher/zpl-rest) installed and configured
