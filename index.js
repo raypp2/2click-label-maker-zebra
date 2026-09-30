@@ -4,7 +4,7 @@ const zplServerUrl = process.env.zplServerUrl;
 const printerId = process.env.printerId;
 const port = process.env.PORT || 80;
 
-const { searchIconsFromIconFinder,
+const { searchIcons,
         convertImageToZPL } = require('./src/graphicHandler');
 
 const labelConfigs = require('./src/labelConfig');
@@ -45,7 +45,7 @@ app.get('/api/search-icons', async (req, res) => {
     }
 
     try {
-        const icons = await searchIconsFromIconFinder(searchTerm);
+        const icons = await searchIcons(searchTerm);
         res.json(icons);
     } catch (error) {
         console.error('Error fetching icons:', error);

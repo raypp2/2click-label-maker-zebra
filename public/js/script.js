@@ -100,9 +100,9 @@ async function searchIcons() {
    const searchTerm = document.getElementById('primaryText').value;
 
    showLoading()
-   console.log('Searching IconFinder for:', searchTerm);
+   console.log('Searching Iconify for:', searchTerm);
     try {
-        const response = await axios.get(`api/search-icons?searchTerm=${searchTerm}`);
+        const response = await axios.get(`api/search-icons?searchTerm=${encodeURIComponent(searchTerm)}`);
         const icons = response.data;
         document.getElementById('iconDiv').style.display = 'flex';
         displayIcons(icons); // Function to handle the display of icons on the frontend
@@ -120,10 +120,10 @@ function displayIcons(icons) {
     icons.forEach(icon => {
         const img = document.createElement('img');
         img.src = icon.previewUrl;
-        img.alt = 'Icon';
+        img.alt = icon.iconId;
         img.className = 'icon'; // Add this line
         img.addEventListener('click', () => {
-            document.getElementById('iconUrl').value = icon.previewUrl.replace(/\d+(?=\.png)/, '300');
+            document.getElementById('iconUrl').value = icon.previewUrl;
         });
         iconContainer.appendChild(img);
     });

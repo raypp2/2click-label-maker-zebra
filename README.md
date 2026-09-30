@@ -22,4 +22,4 @@
 - Idea for this project: [Uriel Guy](https://github.com/UrielGuy)
 - Print server with preview by [mrothenbuecher](https://github.com/mrothenbuecher)
 - Image converter by [metafloor](https://github.com/metafloor/zpl-image)
-- Icons provided by [IconFinder](https://www.iconfinder.com/)
+- Icons provided by [Iconify](https://iconify.design/) and the open-source icon sets it hosts

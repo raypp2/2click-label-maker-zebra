@@ -152,6 +152,8 @@ button:hover {
     border: 1px solid #3a3a3a;
     border-radius: 10px;
     visibility: hidden;
+    /* Preview is at printer resolution (203 dpi); show dots crisply when scaled up */
+    image-rendering: pixelated;
 }
 
 #thumbnails img {
@@ -209,6 +211,10 @@ button:hover {
 }
 
 .icon {
+    /* Iconify SVGs are sized 1em by default; give results a usable size */
+    width: 48px;
+    height: 48px;
+    margin: 4px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
